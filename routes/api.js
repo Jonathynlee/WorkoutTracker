@@ -1,7 +1,7 @@
 const router = require("express").Router();
 const Workout = require("../models/workout.js");
 const Exercise = require("../models/exercise.js");
-
+var path = require('path');
 
 router.post("/api/addExercise", ({ body }, res) => {
     Exercise.create(body)
@@ -65,6 +65,17 @@ router.post("/api/getAllExcercises", ({ body }, res) => {
         });
 });
 
+
+
+router.get("/login", (req, res) => {
+    res.render("login")
+});
+router.get("/", (req, res) => {
+    res.render("home")
+});
+router.get("/signup", (req, res) => {
+    res.render("signup")
+});
 /*
 router.get("/api/transaction", (req, res) => {
   Transaction.find({})
