@@ -8,6 +8,11 @@ const workoutSchema = new Schema({
     trim: true,
     required: "Enter a name for the Workout"
   },
+  image: {
+    type: String,
+    trim: true,
+    required: "Enter a url for an Image"
+  },
   date: {
     type: Date,
     default: Date.now

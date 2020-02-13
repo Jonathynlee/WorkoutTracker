@@ -11,12 +11,175 @@
         integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
     <link rel=stylesheet href="style.css">
     <script src="https://kit.fontawesome.com/70fe2499f8.js" crossorigin="anonymous"></script>
-
+    
 </head>
 
 <body>
-   
-{{{ body }}}
+
+
+
+
+
+    <div class="row header">
+        <div class="col-md-5">
+
+        </div>
+        <div class="col-md-2 titleCol">
+            <h1> Workout Plans</h1>
+            <div id="titleBase">
+
+            </div>
+        </div>
+
+        <div class="col-md-5">
+
+        </div>
+
+    </div>
+
+    <!-- End Header Content-->
+
+
+
+    <!-- Main Content-->
+
+    <div class="row">
+
+        <div class="col-lg-2"></div>
+
+        <div class="col-lg-8" id="workouts">
+            <!-- Workout Boxes Go Here-->
+
+            <!-- Workout 1-->
+
+            {{{ body }}}
+            <!-- End Workout 1-->
+
+            <!-- Add Workout-->
+
+            <!-- End Add workout-->
+
+
+
+
+        </div>
+
+        <div class="col-lg-2"></div>
+
+
+    </div>
+
+
+    <!-- End Main Content-->
+
+
+
+
+
+
+    <!-- Modal For Edits-->
+    <div class="modal fade" id="editWorkoutModal" tabindex="-1" role="dialog" aria-labelledby="editWorkoutLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editWorkoutLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                   <div class="row exerciseInputRow">
+                        <div class = "col-md-6">
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="fas fa-dumbbell"></i></div>
+                            </div>
+                            <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="e.g. pushups">
+                        </div>
+                        </div>
+
+                        <div class = "col-md-6">
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">#</div>
+                            </div>
+                            <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="e.g.10">
+                        </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="modal fade" id="addWorkout" tabindex="-1" role="dialog" aria-labelledby="editWorkoutLabel"
+        aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editWorkoutLabel">Add Workout</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row exerciseInputRow">
+                        <div class = "col-md-6">
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="fas fa-image"></i></div>
+                            </div>
+                            <input type="text" class="form-control" id="workoutImg" placeholder="https://...">
+                        </div>
+                        </div>
+
+                        <div class = "col-md-6">
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">Title</div>
+                            </div>
+                            <input type="text" class="form-control" id="workoutTitle" placeholder="e.g. Feb11 Workout">
+                        </div>
+                        </div>
+
+                    </div>
+
+                    
+
+                    <!--
+                    <div class="input-group mb-2">
+                        <div class="input-group-prepend">
+                            <div class="input-group-text">@</div>
+                        </div>
+                        <input type="text" class="form-control" id="inlineFormInputGroup" placeholder="Username">
+                    </div>
+
+                    -->
+
+
+
+
+
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" onclick = "addWorkout()" class="btn btn-primary">Add Workout</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
 
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
