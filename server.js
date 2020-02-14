@@ -31,7 +31,7 @@ app.set('view engine', 'handlebars');
 
 
 
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/workoutDB", {
+mongoose.connect(process.env.MONGODB_URI || "mongodb://heroku_w7ktkhhc:fe62k1c4acekv9mhd9k1150vss@ds011715.mlab.com:11715/heroku_w7ktkhhc", {
     useNewUrlParser: true,
     useFindAndModify: false
 });
