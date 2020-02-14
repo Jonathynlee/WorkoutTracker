@@ -39,11 +39,12 @@ margin-top: 10px;
 width:250px;
 border: 2px solid white;
 border-radius: 5px;
-
+position: relative;
 height:250px;
 text-align: center;
 float: left;
 margin: 10px 10px;
+z-index:1;
 
 }
 
@@ -60,9 +61,11 @@ margin: 10px 10px;
 .workoutImage{
     height:56%;
     margin:2%;
+    pointer-events: none;
 }
 .WOImageText{
     height:40%;
+    pointer-events: none;
     
 }
 

@@ -1,6 +1,7 @@
 
-
-
+let lastId = "";
+let numOfExercise = 0;
+let currentExerciseArr = [{}];
 $(".addWorkoutBox").on("click", function () {
     $("#addWorkout").modal();
 })
@@ -42,7 +43,7 @@ function addWorkout() {
         data: { name: name, image: img }
 
     }).done(function (result) {
-        
+
         location.reload();
 
     })
@@ -56,17 +57,17 @@ function generateWorkouts() {
     $.ajax({
         method: "GET",
         url: "/workout/getAllWorkouts",
-       
+
 
     }).then(function (result) {
-
-console.log(result)
+       
+        console.log(result)
         for (workoutObj in result) {
 
             $("#workouts").prepend(`
                 
                 
-            <div class="workoutBox" workoutID = "${result[workoutObj]._id}">
+            <div class="workoutBox" workoutID = "${result[workoutObj]._id}" workoutName = "${result[workoutObj].name}">
                 <div class="row workoutImage">
                     <div class="col-md-12 image">
 
@@ -79,24 +80,149 @@ console.log(result)
                         <h2> ${result[workoutObj].name}</h2>
                     </div>
                 </div>
+               
             </div>
                 `)
+               
         }
-        
-
-        
 
 
-    }).done(function(){
-        $(".workoutBox").on("click", function () {
-            $("#editWorkoutModal").modal();
+
+
+
+    }).done(function () {
+        $(".workoutBox").on("click", function (event) {
+            if ($(event.target).attr("workoutID") != null) {
+                setUpModal(event);
+                $("#editWorkoutModal").modal();
+            }
         })
     })
 
 
 
 
-       
+
 }
 
-window.onload = function(){generateWorkouts()}
+window.onload = function () { generateWorkouts() }
+
+
+
+
+function setUpModal(event) {
+    let currentObjectId = $(event.target).attr("workoutid");
+    lastId = currentObjectId
+    let currentObjectName = $(event.target).attr("workoutName");
+    console.log($(event.target).attr("workoutid"))
+    $("#editWorkoutLabel").html(`${currentObjectName}`)
+    $.ajax({
+        method: "GET",
+        url: "/exercise/getExercises",
+        data: { id: currentObjectId }
+
+
+    }).then(function (result) {
+        numOfExercise =0;
+        
+        console.log("got here")
+        $("#exerciseInputRow").html(``);
+        for (items in result) {
+            $("#exerciseInputRow").append(`
+            
+            <div class = "col-md-6">
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text"><i class="fas fa-dumbbell"></i></div>
+                            </div>
+                            <input type="text" class="form-control" exId = "${result[items].id}" id="workout${numOfExercise}" placeholder="e.g. pushups">
+                        </div>
+                        </div>
+
+                        <div class = "col-md-6">
+                        <div class="input-group mb-2">
+                            <div class="input-group-prepend">
+                                <div class="input-group-text">#</div>
+                            </div>
+                            <input type="text" class="form-control" id="qty${numOfExercise}" placeholder="e.g.10">
+                        </div>
+                        </div>
+            
+            `)
+            for (let i =  0; i< numOfExercise;i++){
+
+                let curWorkoutId = $(`#workout${i}`);
+                let curWorkoutqty = $(`#qty${i}`);
+                let  exerciseID = $(`#workout${i}`).attr("exId");
+                currentExerciseArr[i] = {}
+                currentExerciseArr[i] = {"workoutId":lastId, "name":curWorkoutId.val(), "qty":curWorkoutqty.val(), "id":exerciseID};
+            }
+            console.log(currentExerciseArr);
+            numOfExercise++;
+        }
+
+
+    })
+
+}
+
+
+function addExerciseToModal() {
+    $("#exerciseInputRow").append(`
+            
+    
+    <div class = "col-md-6">
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text"><i class="fas fa-dumbbell"></i></div>
+                    </div>
+                    <input type="text" class="form-control" exId = "" id="workout${numOfExercise}" placeholder="e.g. pushups">
+                </div>
+                </div>
+
+                <div class = "col-md-6">
+                <div class="input-group mb-2">
+                    <div class="input-group-prepend">
+                        <div class="input-group-text">#</div>
+                    </div>
+                    <input type="text" class="form-control" id="qty${numOfExercise}" placeholder="e.g.10">
+                </div>
+                </div>
+    
+    `)
+    for (let i =  0; i< numOfExercise;i++){
+
+        let curWorkoutId = $(`#workout${i}`);
+        let curWorkoutqty = $(`#qty${i}`);
+        let  exerciseID = $(`#workout${i}`).attr("exId");
+        currentExerciseArr[i] = {}
+        currentExerciseArr[i] = {"workoutId":lastId, "name":curWorkoutId.val(), "qty":curWorkoutqty.val(), "id":exerciseID};
+    }
+    console.log(currentExerciseArr);
+    numOfExercise++;
+}
+
+
+
+function updateExerciseDB(){
+    for (let i =  0; i< numOfExercise;i++){
+
+        let curWorkoutId = $(`#workout${i}`);
+        let curWorkoutqty = $(`#qty${i}`);
+        let  exerciseID = $(`#workout${i}`).attr("exId");
+        currentExerciseArr[i] = {}
+        currentExerciseArr[i] = {workoutId:lastId, name:curWorkoutId.val(), qty:curWorkoutqty.val(), id:exerciseID};
+        console.log(currentExerciseArr);
+    }
+    $.ajax({
+        method: "POST",
+        url: "/exercise/addExercise",
+    data: {currentExerciseArr}, 
+        
+
+    }).then(function (result) {
+console.log(result)
+    })
+
+}
+

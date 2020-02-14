@@ -12,6 +12,9 @@ const exerciseSchema = new Schema({
     type: Number,
     required: "Enter the number you did"
   },
+  workoutID:{
+type:String
+  },
   date: {
     type: Date,
     default: Date.now
