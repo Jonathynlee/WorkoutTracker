@@ -117,12 +117,13 @@ function setUpModal(event) {
     console.log($(event.target).attr("workoutid"))
     $("#editWorkoutLabel").html(`${currentObjectName}`)
     $.ajax({
-        method: "GET",
+        method: "POST",
         url: "/exercise/getExercises",
-        data: { id: currentObjectId }
+        data: { workoutID: currentObjectId }
 
 
     }).then(function (result) {
+        console.log(result);
         numOfExercise =0;
         
         console.log("got here")
@@ -135,7 +136,7 @@ function setUpModal(event) {
                             <div class="input-group-prepend">
                                 <div class="input-group-text"><i class="fas fa-dumbbell"></i></div>
                             </div>
-                            <input type="text" class="form-control" exId = "${result[items].id}" id="workout${numOfExercise}" placeholder="e.g. pushups">
+                            <input type="text" value = "${result[items].name}" class="form-control" exId = "${result[items]._id}" id="workout${numOfExercise}" placeholder="e.g. pushups">
                         </div>
                         </div>
 
@@ -144,7 +145,7 @@ function setUpModal(event) {
                             <div class="input-group-prepend">
                                 <div class="input-group-text">#</div>
                             </div>
-                            <input type="text" class="form-control" id="qty${numOfExercise}" placeholder="e.g.10">
+                            <input type="text" value = "${result[items].qty}" class="form-control" id="qty${numOfExercise}" placeholder="e.g.10">
                         </div>
                         </div>
             
@@ -222,6 +223,7 @@ function updateExerciseDB(){
 
     }).then(function (result) {
 console.log(result)
+$("#editWorkoutModal").modal("hide");
     })
 
 }
